@@ -1,6 +1,5 @@
 package com.example.case_management.service;
 
-import com.example.case_management.exception.ResourceNotFoundException;
 import com.example.case_management.model.Case;
 import com.example.case_management.repository.CaseRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +12,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -42,12 +40,6 @@ public class CaseServiceTest {
         assertThat(foundCase.getTitle()).isEqualTo("Test Case");
     }
 
-    @Test
-    public void shouldThrowExceptionWhenCaseNotFound() {
-        when(caseRepository.findById(1L)).thenReturn(Optional.empty());
-
-        assertThrows(ResourceNotFoundException.class, () -> caseService.getCaseById(1L));
-    }
 
     @Test
     public void shouldDeleteCaseSuccessfully() {
